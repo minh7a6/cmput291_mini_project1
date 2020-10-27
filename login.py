@@ -8,8 +8,7 @@ from datetime import date
 
 import sqlite3
 import sys
-conn	=	sqlite3.connect('./assignment.db')	
-c	=	conn.cursor()
+
 def loginPage(c):
     print("\r\n------------------------------------------------Login Page------------------------------------------------")
     print("1. Login")
@@ -59,5 +58,4 @@ def loginPage(c):
                 {"userId":newUserId, "name":newName,"pwd":newPassword, "city":newCity, "crdate":date.today()})
         c.execute('SELECT	*	FROM	users')
         return newUserId
-loginPage(c)
 
