@@ -1,4 +1,5 @@
 import sqlite3
 import sys
-def main_menu(uid):
+def menu(uid):
+    print("gfwqfe")
     

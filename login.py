@@ -5,7 +5,7 @@ Spyder Editor
 This is a temporary script file.
 """
 from datetime import date
-
+from main_menu import menu 
 import sqlite3
 import sys
 
@@ -23,8 +23,10 @@ def loginPage(c):
             c.execute('''Select uid FROM users WHERE uid= :userId AND pwd = :password;''',
                     {"userId": userId, "password":password})
             rows = c.fetchall()
+            print(rows)
             if(rows!=[]):
                 print("Sucess")
+                menu(userId)
                 return userId
             else:
                 tryAgain = input("Wrong Username or password. Would you like to try again? Yes =1 No =2 " )
