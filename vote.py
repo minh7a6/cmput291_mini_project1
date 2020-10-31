@@ -2,7 +2,8 @@ import sqlite3
 import sys
 from datetime import date
 
-def giveVote(uid, c):
+def giveVote(uid, conn):
+    c = conn.cursor()
     pid_tar = input("Put the post ID that you want to vote: ")
     c.execute('''SELECT * FROM posts p WHERE p.pid = (:pid);''', {"pid": pid_tar})
     row = c.fetchone()
@@ -14,15 +15,15 @@ def giveVote(uid, c):
     if row is not None:
         print("you already voted for this posts, going back to menu...")
         return
-    c.execute('''SELECT v.vno FROM votes v ORDER BY vno DESC LIMIT 1;''')
+    c.execute('''SELECT v.vno FROM votes v WHERE v.pid = :pid ORDER BY vno DESC LIMIT 1;''', {"pid":pid_tar})
     row = c.fetchone()
     vnoOld = row[0]
     vnoNew = vnoOld + 1
-    print(vnoNew)
-    c.execute("INSERT INTO votes VALUES(:pid ,:vno , :vdate , :uid)",
+    c.execute('''INSERT INTO 'votes' VALUES(:pid ,:vno , :vdate , :uid)''',
                 {"pid":pid_tar, "vno":vnoNew,"vdate":date.today(), "uid":uid})
+    conn.commit()
 
 def func_test():
-    conn = sqlite3.connect('./assignment.db')	
-    c = conn.cursor()
-    giveVote("mldang", c)
+    conn = sqlite3.connect('./test_data.db')
+    giveVote("mldang", conn)
+func_test()
