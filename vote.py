@@ -7,7 +7,7 @@ def giveVote(uid, conn):
     pid_tar = input("Put the post ID that you want to vote: ")
     c.execute('''SELECT * FROM posts p WHERE p.pid = (:pid);''', {"pid": pid_tar})
     row = c.fetchone()
-    if row == []:
+    if row is None:
         print("the post id does not exist, going back to menu...")
         return
     c.execute('''SELECT * FROM votes v WHERE v.pid = :pid AND v.uid = :uid;''', {"pid": pid_tar, "uid":uid})
@@ -19,7 +19,7 @@ def giveVote(uid, conn):
     row = c.fetchone()
     vnoOld = row[0]
     vnoNew = vnoOld + 1
-    c.execute('''INSERT INTO 'votes' VALUES(:pid ,:vno , :vdate , :uid)''',
+    c.execute('''INSERT INTO 'votes' VALUES(:pid ,:vno , :vdate , :uid);''',
                 {"pid":pid_tar, "vno":vnoNew,"vdate":date.today(), "uid":uid})
     conn.commit()
 
