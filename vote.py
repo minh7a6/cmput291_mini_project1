@@ -26,4 +26,4 @@ def giveVote(uid, conn):
 def func_test():
     conn = sqlite3.connect('./test_data.db')
     giveVote("mldang", conn)
-func_test()
+# func_test()

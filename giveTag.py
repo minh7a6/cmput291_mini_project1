@@ -21,4 +21,4 @@ def giveTag(uid, conn):
 def func_test():
     conn = sqlite3.connect('./test_data.db')	
     giveTag("mldang", conn)
-func_test()
+# func_test()

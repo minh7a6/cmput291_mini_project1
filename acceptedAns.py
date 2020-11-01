@@ -24,4 +24,4 @@ def acceptedAns(uid, conn):
 def func_test():
     conn = sqlite3.connect('./test_data.db')
     acceptedAns("mldang", conn)
-func_test()
+# func_test()

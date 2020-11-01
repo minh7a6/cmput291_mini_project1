@@ -1,16 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
-
-This is a temporary script file.
-"""
 from datetime import date
 
 import sqlite3
 import sys
+import re
 
-def loginPage(c):
+def loginPage(conn):
     print("\r\n------------------------------------------------Login Page------------------------------------------------")
+    pattern = re.compile("")
+    c = conn.cursor()
     print("1. Login")
     print("2. Sign up") 	
     LogSignOption = input("Please press 1 or 2 for which option you would like to pick: ")
@@ -27,7 +24,7 @@ def loginPage(c):
                 print("Sucess")
                 return userId
             else:
-                tryAgain = input("Wrong Username or password. Would you like to try again? Yes =1 No =2 " )
+                tryAgain = input("Wrong Username or password. Would you like to try again(1: Yes) (2: No)?  " )
                 if tryAgain == "2":
                     sys.exit("leaving....")
     elif LogSignOption=="2":
@@ -43,19 +40,15 @@ def loginPage(c):
                 rows = c.fetchall()
             else:
                 sys.exit("leaving....")
-        newName = input ("Please enter your name ")
-        newPassword = input ("Please enter your password ")
-        newCity = input ("Please enter your city ")
-    #   while(rows !=[]):
-    #       print("You have entered in a duplicate user Id please try enter another")
-    #       newUserId = input("Please enter a user id ")
-    #       newName = input ("Please enter your name ")
-    #       newPassword = input ("Please enter your password ")
-    #       newCity = input ("Please enter your city ")
-    #       c.execute('Select uid FROM users WHERE uid=?;', (newUserId,))
-    #       rows = c.fetchall()
+        newName = input ("Please enter your name: ")
+        newPassword = input ("Please enter your password: ")
+        newCity = input ("Please enter your city: ")
         c.execute('''INSERT INTO users VALUES(:userId ,:name , :pwd , :city , :crdate )''',
                 {"userId":newUserId, "name":newName,"pwd":newPassword, "city":newCity, "crdate":date.today()})
-        c.execute('SELECT	*	FROM	users')
+        conn.commit()
         return newUserId
 
+def func_test():
+    conn = sqlite3.connect('./test_data.db')	
+    print(loginPage(conn))
+func_test()
