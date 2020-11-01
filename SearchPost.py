@@ -8,12 +8,22 @@ def SearchMain(c):
         keywordList = keyword.split()
         query = ""
         start =True
+        counter = 1
         for word in keywordList:
             if start == True:
-                query = "SELECT * FROM posts p1 WHERE p1.title like '%"+word+"%' or p1.body like '%"+word+"%' UNION Select p1.pid, p1.pdate, p1.title, p1.body, p1.poster from posts p1, tags t1 WHERE p1.pid= t1.pid AND t1.tag like '%"+word+"%' "
+                query = "WITH table"+ str(counter)+" as (SELECT * FROM posts p1 WHERE p1.title like '%"+word+"%' or p1.body like '%"+word+"%' UNION Select p1.pid, p1.pdate, p1.title, p1.body, p1.poster from posts p1, tags t1 WHERE p1.pid= t1.pid AND t1.tag like '%"+word+"%' )"
                 start = False
             else:
-                query = query +"UNION SELECT * FROM posts p1 WHERE p1.title like '%"+word+"%' or p1.body like '%"+word+"%' UNION Select p1.pid, p1.pdate, p1.title, p1.body, p1.poster from posts p1, tags t1 WHERE p1.pid= t1.pid AND t1.tag like '%"+word+"%' "
+                query = query +", table"+ str(counter)+" as (SELECT * FROM posts p1 WHERE p1.title like '%"+word+"%' or p1.body like '%"+word+"%' UNION Select p1.pid, p1.pdate, p1.title, p1.body, p1.poster from posts p1, tags t1 WHERE p1.pid= t1.pid AND t1.tag like '%"+word+"%') "
+            counter =counter +1
+        counter =1;
+        for word in keywordList:
+            if counter ==1 :
+                query = query + "Select * FROM table"+str(counter)
+            else:
+                query = query +  " UNION ALL Select * from table"+str(counter)
+            counter =counter +1
+        query = "With masterQ as (" +query + ") SELECT masterQ.pid, masterQ.pdate,masterQ.title,masterQ.body, masterQ.poster, count(*) as countTag from masterQ Group by pid order by countTag DESC limit 5"
         query = """With answerCount as (With countAnswer as (Select p1.title as title, count(a1.pid) as countAns, p1.pid as pid
                     From questions q1, posts p1, answers a1
                     WHERE p1.pid = q1.pid
