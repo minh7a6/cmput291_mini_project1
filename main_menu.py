@@ -60,7 +60,7 @@ def privileged_menu(uid, conn):
             Post(uid, conn)
         elif sel == "2":
             c = conn.cursor()
-            SearchMain(conn)
+            SearchMain(c)
         elif sel == "3":
             giveAns(uid, conn)
         elif sel == "4":
