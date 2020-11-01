@@ -7,6 +7,7 @@ from giveBadge import giveBadge
 from giveTag import giveTag
 from PostQuestions import Post
 from SearchPost import SearchMain
+from EditPrivUser import privUserEdit
 
 
 def exit(conn):
@@ -71,6 +72,8 @@ def privileged_menu(uid, conn):
             giveBadge(uid, conn)
         elif sel == "7":
             giveTag(uid, conn)
+        elif sel =="8":
+            privUserEdit(conn)
         elif sel == "9":
             print("Goodbye...")
             exit(conn)
