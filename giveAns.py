@@ -19,6 +19,7 @@ def giveAns(uid, conn):
                 {"pid": pidNew, "pdate": date.today(), "title": title, "body":body, "poster": uid})
     c.execute('''INSERT INTO 'answers' VALUES(:pid, :qid);''', {"pid": pidNew, "qid": pid})
     conn.commit()
+    
 def func_test():
     conn = sqlite3.connect('./test_data.db')	
     giveAns("mldang", conn)
