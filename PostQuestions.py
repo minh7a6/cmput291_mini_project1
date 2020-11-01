@@ -1,6 +1,7 @@
 import sqlite3
 from datetime import date
-def Post(uid,c):
+def Post(uid,conn):
+    c = conn.cursor()
     print("\r\n------------------------------------------------Post Page------------------------------------------------")
     title = input("PLease input a title: ")
     body =  input("Please input the body:  ")
@@ -9,6 +10,6 @@ def Post(uid,c):
     pidNew = "p"+str(int(pidOld[1:])+1)
     c.execute('''INSERT INTO posts VALUES(:pid ,:date , :title , :body , :uid )''',
               {"pid":pidNew, "date":date.today(),"title":title, "body":body, "uid":uid})
-    c.execute('''Select * from posts''')
-    print(c.fetchall())
-    
+    # c.execute('''Select * from posts''')
+    # print(c.fetchall())
+    conn.commit()
