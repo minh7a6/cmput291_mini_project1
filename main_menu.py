@@ -5,6 +5,9 @@ from vote import giveVote
 from acceptedAns import acceptedAns
 from giveBadge import giveBadge
 from giveTag import giveTag
+from PostQuestions import Post
+from SearchPost import SearchMain
+
 
 def exit(conn):
     conn.close()
@@ -22,9 +25,10 @@ def normal_menu(uid, conn):
         print("5: Exit")
         sel = input("Please choose an option: ")
         if sel == "1":
-            print("TODO")
+            Post(uid, conn)
         elif sel == "2":
-            print("TODO")
+            c = conn.cursor()
+            SearchMain(conn)
         elif sel == "3":
             giveAns(uid, conn)
         elif sel == "4":
@@ -53,9 +57,10 @@ def privileged_menu(uid, conn):
         print("9: Exit")
         sel = input("Please choose an option: ")
         if sel == "1":
-            print("TODO")
+            Post(uid, conn)
         elif sel == "2":
-            print("TODO")
+            c = conn.cursor()
+            SearchMain(conn)
         elif sel == "3":
             giveAns(uid, conn)
         elif sel == "4":
