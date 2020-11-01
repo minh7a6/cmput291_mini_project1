@@ -20,6 +20,7 @@ def loginPage(conn):
             c.execute('''Select uid FROM users WHERE uid= :userId AND pwd = :password;''',
                     {"userId": userId, "password":password})
             rows = c.fetchall()
+            print(rows)
             if(rows!=[]):
                 print("Sucess")
                 return userId
