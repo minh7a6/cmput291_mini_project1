@@ -13,7 +13,7 @@ def acceptedAns(uid, conn):
     q_pid = row[0]
     c.execute('''SELECT * FROM questions q WHERE q.pid = (:pid);''', {"pid": q_pid})
     row = c.fetchall()
-    if len(row) > 1:
+    if len(row[0]) > 1:
         sel = input("The question already has an accepted answer, do you still want to continue (1: yes) (2: no)? ")
         if sel == "2":
             print("Going back to menu...")
