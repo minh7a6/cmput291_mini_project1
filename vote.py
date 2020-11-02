@@ -16,6 +16,7 @@ def giveVote(uid, conn, pid_tar):
     if row is not None:
         print("you already voted for this posts, going back to menu...")
         return
+    print("Starting to Vote...")
     vnoNew = str(uuid4().int)
     c.execute('''SELECT v.vno FROM votes v WHERE v.pid = (:pid) AND v.vno = (:vno);''', {"pid":pid_tar, "vno":vnoNew})
     row = c.fetchone()
@@ -26,7 +27,7 @@ def giveVote(uid, conn, pid_tar):
     c.execute('''INSERT INTO 'votes' VALUES(:pid ,:vno , :vdate , :uid);''',
                 {"pid":pid_tar, "vno":vnoNew,"vdate":date.today(), "uid":uid})
     conn.commit()
-
+    print("Success!")
 def func_test():
     conn = sqlite3.connect('./test_data.db')
     giveVote("mldang", conn, "p048")

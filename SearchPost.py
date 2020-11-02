@@ -68,6 +68,8 @@ def SearchMain(c):
                     + checkNull(x[5]) + " ||  "
                     + checkNull(x[6]))
             count += 1
+        if len(table) == 0:
+            return print("There are no posts matching your keyword, going back to menu...")
         sel = input("Which post do you want to choose(1-5)? ")
         if sel.isnumeric():
             if int(sel) > len(table) or int(sel) < 1:

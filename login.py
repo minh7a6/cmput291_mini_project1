@@ -50,4 +50,5 @@ def loginPage(conn):
         c.execute('''INSERT INTO users VALUES(:userId ,:name , :pwd , :city , :crdate );''',
                 {"userId":newUserId, "name":newName,"pwd":newPassword, "city":newCity, "crdate":date.today()})
         conn.commit()
+        print("Success!")
         return newUserId
