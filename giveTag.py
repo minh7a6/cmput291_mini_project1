@@ -17,6 +17,7 @@ def giveTag(uid, conn, pid):
         return
     c.execute('''INSERT INTO 'tags' VALUES(:pid, :tag);''',{"pid": pid, "tag": tag})
     conn.commit()
+    print("Success")
 
 def func_test():
     conn = sqlite3.connect('./test_data.db')	

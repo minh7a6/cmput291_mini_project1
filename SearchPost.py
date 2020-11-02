@@ -59,14 +59,16 @@ def SearchMain(c):
                     on answerCount.pid =  keyword.pid"""
         c.execute(query)
         table = c.fetchall()
-        print("PID || pdate || Title || Body || Poster || # Votes || # Ans")
+        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans")
+        count = 1
         for x in table:
-            print(checkNull(x[0]) +" ||  "
+            print(str(count) +" ||  " + checkNull(x[0]) +" ||  "
                     + checkNull(x[1])+" ||  "+checkNull(x[2]) 
-                    + " ||  "+checkNull(x[3]) + " ||  "+ checkNull(x[4]) + " ||  "
+                    + " ||  "+ checkNull(x[3]) + " ||  "+ checkNull(x[4]) + " ||  "
                     + checkNull(x[5]) + " ||  "
                     + checkNull(x[6]))
-        sel = int(input("Which post do you want to choose? "))
+            count += 1
+        sel = int(input("Which post do you want to choose(1-5)? "))
         if sel > len(table):
             print("Wrong option")
         else:

@@ -2,9 +2,9 @@ import sqlite3
 import sys
 from datetime import date
 
-def acceptedAns(uid, conn):
+def acceptedAns(uid, conn, pid_input):
     c = conn.cursor()
-    pid_input = input("Put the post ID that you want to accept as answer: ")
+    # pid_input = input("Put the post ID that you want to accept as answer: ")
     c.execute('''SELECT a.qid FROM answers a WHERE a.pid = (:pid);''', {"pid": pid_input})
     row = c.fetchone()
     if row is None:

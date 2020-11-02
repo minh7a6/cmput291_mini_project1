@@ -15,3 +15,5 @@ def privUserEdit(conn,pid):
     body = input ("Please enter a new body   ")
     c.execute('''UPDATE 'posts' SET title = (:title) , body = (:body) WHERE pid = (:pid);''',
               {"title":title, "body":body, "pid":rowEdit[0]})
+    conn.commit()
+    print("Success")

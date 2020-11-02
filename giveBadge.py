@@ -17,6 +17,7 @@ def giveBadge(uid, conn, posters):
         return
     c.execute('''INSERT INTO 'ubadges' VALUES(:uid, :bdate, :bname);''',{"uid": posters, "bname": bname, "bdate": date.today()})
     conn.commit()
+    print("Success")
 
 def func_test():
     conn = sqlite3.connect('./test_data.db')	
