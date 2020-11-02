@@ -68,13 +68,16 @@ def SearchMain(c):
                     + checkNull(x[5]) + " ||  "
                     + checkNull(x[6]))
             count += 1
-        sel = int(input("Which post do you want to choose(1-5)? "))
-        if sel > len(table):
-            print("Wrong option")
+        sel = input("Which post do you want to choose(1-5)? ")
+        if sel.isnumeric():
+            if int(sel) > len(table) or int(sel) < 1:
+                print("Wrong option")
+            else:
+                return (table[int(sel) - 1][0], table[int(sel)-1][4])
         else:
-            return (table[sel - 1][0], table[sel-1][4])
+            print("Wrong option")
 def func_test():
     conn = sqlite3.connect('./test_data.db')	
     print(str(SearchMain(conn.cursor())))
-
+# func_test()
 
