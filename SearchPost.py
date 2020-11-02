@@ -59,7 +59,7 @@ def SearchMain(c):
                     on answerCount.pid =  keyword.pid"""
         c.execute(query)
         table = c.fetchall()
-        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans")
+        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans /r/n")
         count = 1
         for x in table:
             print(str(count) +" ||  " + checkNull(x[0]) +" ||  "
@@ -73,11 +73,19 @@ def SearchMain(c):
         sel = input("Which post do you want to choose(1-5)? ")
         if sel.isnumeric():
             if int(sel) > len(table) or int(sel) < 1:
-                print("Wrong option")
+                sel = input("Wrong option would you like to go back to menu (1: yes)?")
+                if sel == "1":
+                    return print("Going back to menu")
+                else:
+                    print("Going back to Search post")
             else:
                 return (table[int(sel) - 1][0], table[int(sel)-1][4])
         else:
-            print("Wrong option")
+            sel = input("Wrong option would you like to go back to menu (1: yes)?")
+            if sel == "1":
+                return print("Going back to menu")
+            else:
+                print("Going back to Search post")
 def func_test():
     conn = sqlite3.connect('./test_data.db')	
     print(str(SearchMain(conn.cursor())))
