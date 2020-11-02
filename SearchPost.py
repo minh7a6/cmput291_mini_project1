@@ -10,7 +10,7 @@ def SearchMain(c):
     print("\r\n------------------------------------------------Search Page------------------------------------------------")
     end = False
     while end ==False:
-        keyword = input("Please input keyword(s) to search (please leave a space between each keyword) ")
+        keyword = input("Please input keyword(s) to search (please leave a space between each keyword): ")
         keywordList = keyword.split()
         query = ""
         start =True

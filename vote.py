@@ -1,6 +1,7 @@
 import sqlite3
 import sys
 from datetime import date
+from uuid import uuid4
 
 def giveVote(uid, conn, pid_tar):
     c = conn.cursor()
@@ -15,13 +16,13 @@ def giveVote(uid, conn, pid_tar):
     if row is not None:
         print("you already voted for this posts, going back to menu...")
         return
-    c.execute('''SELECT v.vno FROM votes v WHERE v.pid = (:pid) ORDER BY vno DESC LIMIT 1;''', {"pid":pid_tar})
+    vnoNew = str(uuid4().int)
+    c.execute('''SELECT v.vno FROM votes v WHERE v.pid = (:pid) AND v.vno = (:vno);''', {"pid":pid_tar, "vno":vnoNew})
     row = c.fetchone()
-    if row is None:
-        vnoNew = 0
-    else:
-        vnoOld = row[0]
-        vnoNew = vnoOld + 1
+    while row is not None:
+        vnoNew = str(uuid4().int)
+        c.execute('''SELECT v.vno FROM votes v WHERE v.pid = (:pid) AND v.vno = (:vno);''', {"pid":pid_tar, "vno":vnoNew})
+        row = c.fetchone()
     c.execute('''INSERT INTO 'votes' VALUES(:pid ,:vno , :vdate , :uid);''',
                 {"pid":pid_tar, "vno":vnoNew,"vdate":date.today(), "uid":uid})
     conn.commit()
