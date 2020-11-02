@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import date
 from sqlite3.dbapi2 import Date
-import uuid
+from numGen import numGen
 
 def giveAns(uid, conn, pid):
     c = conn.cursor()
@@ -11,13 +11,11 @@ def giveAns(uid, conn, pid):
     if row is None:
         print("the post id is not a question, going back to menu...")
         return
-    id = uuid.uuid4()
-    pidNew = "p" + str(id.int)
+    pidNew = numGen(4)
     c.execute('''SELECT pid FROM posts WHERE pid = (:pid);''', {"pid": pidNew})
     row = c.fetchone()
     while row is not None:
-        id = uuid.uuid4()
-        pidNew = "p" + str(id.int)
+        pidNew = numGen(4)
         c.execute('''SELECT pid FROM posts WHERE pid = (:pid);''', {"pid": pidNew})
         row = c.fetchone()
     title = input("What is your title for this answer: ")

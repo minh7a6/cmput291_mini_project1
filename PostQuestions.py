@@ -1,18 +1,16 @@
 import sqlite3
 from datetime import date
-import uuid
+from numGen import numGen
 def Post(uid,conn):
     c = conn.cursor()
     print("\r\n------------------------------------------------Post Page------------------------------------------------")
     title = input("PLease input a title: ")
     body =  input("Please input the body:  ")
-    id = uuid.uuid4()
-    pidNew = "p" + str(id.int)
+    pidNew = numGen(4)
     c.execute('''SELECT pid FROM posts WHERE pid = (:pid);''', {"pid": pidNew})
     row = c.fetchone()
     while row is not None:
-        id = uuid.uuid4()
-        pidNew = "p" + str(id.int)
+        pidNew = numGen(4)
         c.execute('''SELECT pid FROM posts WHERE pid = (:pid);''', {"pid": pidNew})
         row = c.fetchone()
     c.execute('''INSERT INTO posts VALUES(:pid ,:date , :title , :body , :uid );''',

@@ -16,12 +16,11 @@ def loginPage(conn):
     if LogSignOption == "1":
         while(tryAgain):
             print("Login page")
-            userId = input("Please enter your user id ")
-            password = input ("Please enter your password ")
+            userId = input("Please enter your user id: ")
+            password = input ("Please enter your password: ")
             c.execute('''Select uid FROM users WHERE uid= :userId AND pwd = :password;''',
                     {"userId": userId, "password":password})
             rows = c.fetchall()
-            print(rows)
             if(rows!=[]):
                 print("Sucess")
                 tryAgain = False
@@ -33,7 +32,9 @@ def loginPage(conn):
         return userId
     elif LogSignOption=="2":
         print ("Signup page")
-        newUserId = input("Please enter a user id ")
+        newUserId = input("Please enter a user id: ")
+        while len(newUserId) > 4:
+            newUserId = input("UID exceeds 4 characters. Please try again: ")
         c.execute('Select uid FROM users WHERE uid=?;', (newUserId,))
         rows = c.fetchall()
         while(rows !=[]):

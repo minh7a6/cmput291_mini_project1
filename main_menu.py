@@ -40,7 +40,6 @@ def normal_menu(uid, conn):
                         giveVote(uid, conn, table[0])
                     elif sel == "3":
                         print("Going back to menu")
-                        exit(conn)
                         break
                     else: 
                         print("Invalid option")
@@ -90,7 +89,6 @@ def privileged_menu(uid, conn):
                         privUserEdit(conn, table[0])
                     elif sel == "7":
                         print("Going back to menu")
-                        exit(conn)
                         break
                     else: 
                         print("Invalid option")
