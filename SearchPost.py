@@ -1,10 +1,16 @@
 import sqlite3
 from datetime import date
+
+def checkNull(x):
+    if x is None:
+        return "None"
+    else:
+        return str(x)
 def SearchMain(c):
     print("\r\n------------------------------------------------Search Page------------------------------------------------")
     end = False
     while end ==False:
-        keyword = input("Please input keyword(s) to search (please leave a space between each keyword)")
+        keyword = input("Please input keyword(s) to search (please leave a space between each keyword) ")
         keywordList = keyword.split()
         query = ""
         start =True
@@ -16,7 +22,7 @@ def SearchMain(c):
             else:
                 query = query +", table"+ str(counter)+" as (SELECT * FROM posts p1 WHERE p1.title like '%"+word+"%' or p1.body like '%"+word+"%' UNION Select p1.pid, p1.pdate, p1.title, p1.body, p1.poster from posts p1, tags t1 WHERE p1.pid= t1.pid AND t1.tag like '%"+word+"%') "
             counter =counter +1
-        counter =1;
+        counter = 1
         for word in keywordList:
             if counter ==1 :
                 query = query + "Select * FROM table"+str(counter)
@@ -52,11 +58,22 @@ def SearchMain(c):
                     LEFT join answerCount
                     on answerCount.pid =  keyword.pid"""
         c.execute(query)
-        print(c.fetchall())
-        returnPage = input("Would you like to return to the main menue? 1.Yes 2.No")
-        if returnPage == "1":
-            end =True
+        table = c.fetchall()
+        print("PID || pdate || Title || Body || Poster || # Votes || # Ans")
+        for x in table:
+            print(checkNull(x[0]) +" ||  "
+                    + checkNull(x[1])+" ||  "+checkNull(x[2]) 
+                    + " ||  "+checkNull(x[3]) + " ||  "+ checkNull(x[4]) + " ||  "
+                    + checkNull(x[5]) + " ||  "
+                    + checkNull(x[6]))
 
-
+        sel = int(input("Which post do you want to choose? "))
+        if sel > len(table):
+            print("Wrong option")
+        else:
+            return (table[sel - 1][0], table[sel-1][4])
+def func_test():
+    conn = sqlite3.connect('./test_data.db')	
+    print(str(SearchMain(conn.cursor())))
 
 
