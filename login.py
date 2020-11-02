@@ -12,6 +12,7 @@ def loginPage(conn):
     print("2. Sign up") 	
     LogSignOption = input("Please press 1 or 2 for which option you would like to pick: ")
     tryAgain = True
+    userId = 0
     if LogSignOption == "1":
         while(tryAgain):
             print("Login page")
@@ -23,11 +24,13 @@ def loginPage(conn):
             print(rows)
             if(rows!=[]):
                 print("Sucess")
+                tryAgain = False
                 return userId
             else:
                 tryAgain = input("Wrong Username or password. Would you like to try again(1: Yes) (2: No)?  " )
                 if tryAgain == "2":
                     sys.exit("leaving....")
+        return userId
     elif LogSignOption=="2":
         print ("Signup page")
         newUserId = input("Please enter a user id ")
@@ -44,12 +47,7 @@ def loginPage(conn):
         newName = input ("Please enter your name: ")
         newPassword = input ("Please enter your password: ")
         newCity = input ("Please enter your city: ")
-        c.execute('''INSERT INTO users VALUES(:userId ,:name , :pwd , :city , :crdate )''',
+        c.execute('''INSERT INTO users VALUES(:userId ,:name , :pwd , :city , :crdate );''',
                 {"userId":newUserId, "name":newName,"pwd":newPassword, "city":newCity, "crdate":date.today()})
         conn.commit()
         return newUserId
-
-def func_test():
-    conn = sqlite3.connect('./test_data.db')	
-    print(loginPage(conn))
-func_test()

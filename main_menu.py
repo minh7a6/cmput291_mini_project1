@@ -91,7 +91,7 @@ def main_menu(uid, conn):
     else: 
         privileged_menu(uid, conn)
 
-def func_test():
-    conn = sqlite3.connect('./test_data.db')	
-    main_menu("mldang", conn)
-func_test()
+# def func_test():
+#     conn = sqlite3.connect('./test_data.db')	
+#     main_menu("mldang", conn)
+# func_test()

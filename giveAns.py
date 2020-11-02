@@ -2,9 +2,9 @@ import sqlite3
 from datetime import date
 from sqlite3.dbapi2 import Date
 
-def giveAns(uid, conn):
+def giveAns(uid, conn, pid):
     c = conn.cursor()
-    pid = input("Put the post ID that you want to answer: ")
+    # pid = input("Put the post ID that you want to answer: ")
     c.execute('''SELECT q.pid FROM questions q WHERE q.pid = :pid;''', {"pid": pid})
     row = c.fetchone()
     if row is None:
