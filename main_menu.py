@@ -73,7 +73,7 @@ def privileged_menu(uid, conn):
         elif sel == "7":
             giveTag(uid, conn)
         elif sel =="8":
-            privUserEdit(conn)
+            privUserEdit(conn,pid)
         elif sel == "9":
             print("Goodbye...")
             exit(conn)

@@ -66,7 +66,6 @@ def SearchMain(c):
                     + " ||  "+checkNull(x[3]) + " ||  "+ checkNull(x[4]) + " ||  "
                     + checkNull(x[5]) + " ||  "
                     + checkNull(x[6]))
-
         sel = int(input("Which post do you want to choose? "))
         if sel > len(table):
             print("Wrong option")
