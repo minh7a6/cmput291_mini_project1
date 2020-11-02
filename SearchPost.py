@@ -70,7 +70,7 @@ def SearchMain(c):
             count += 1
         if len(table) == 0:
             return print("There are no posts matching your keyword, going back to menu...")
-        sel = input("Which post do you want to choose(1-5)? ")
+        sel = input("Which post do you want to choose(1-{0})? ".format(len(table)))
         if sel.isnumeric():
             if int(sel) > len(table) or int(sel) < 1:
                 sel = input("Wrong option would you like to go back to menu (1: yes)?")
