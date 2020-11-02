@@ -3,20 +3,23 @@ import sys
 from datetime import date
 
 def acceptedAns(uid, conn, pid_input):
+    print("\r\n--------------------------------------------------------------------------------------------------------")
     c = conn.cursor()
     # pid_input = input("Put the post ID that you want to accept as answer: ")
     c.execute('''SELECT a.qid FROM answers a WHERE a.pid = (:pid);''', {"pid": pid_input})
     row = c.fetchone()
     if row is None:
         print("The post id is not in the answer, going back to menu...")
+        print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
         return
     q_pid = row[0]
-    c.execute('''SELECT theaid FROM questions q WHERE q.pid = (:pid);''', {"pid": q_pid})
+    c.execute('''SELECT q.theaid FROM questions q WHERE q.pid = (:pid);''', {"pid": q_pid})
     row = c.fetchall()
     if len(row) > 1:
         sel = input("The question already has an accepted answer, do you still want to continue (1: yes) (2: no)? ")
         if sel == "2":
             print("Going back to menu...")
+            print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
             return
         elif sel == "1":
             print("Starting to change....")
@@ -24,7 +27,8 @@ def acceptedAns(uid, conn, pid_input):
             return print("Wrong option")
     c.execute('''UPDATE 'questions' SET theaid = (:theaid) WHERE pid = (:pid)''', {"pid":q_pid, "theaid": pid_input})
     conn.commit()
-    print("Success")
+    print("Success!")
+    print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
 
 def func_test():
     conn = sqlite3.connect('./test_data.db')

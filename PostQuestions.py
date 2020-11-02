@@ -18,3 +18,4 @@ def Post(uid,conn):
     c.execute('''INSERT INTO questions(pid) VALUES(:pid);''', {"pid": pidNew})
     conn.commit()
     print("Success!")
+    print("\r\n--------------------------------------------------------------------------------------------------------\r\n")

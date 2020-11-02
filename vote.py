@@ -4,11 +4,13 @@ from datetime import date
 from numGen import numGen
 
 def giveVote(uid, conn, pid_tar):
+    print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
     c = conn.cursor()
     c.execute('''SELECT * FROM votes v WHERE v.pid = :pid AND v.uid = :uid;''', {"pid": pid_tar, "uid":uid})
     row = c.fetchone()
     if row is not None:
         print("you already voted for this posts, going back to menu...")
+        print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
         return
     print("Starting to Vote...")
     vnoNew = numGen(4)
@@ -22,6 +24,7 @@ def giveVote(uid, conn, pid_tar):
                 {"pid":pid_tar, "vno":vnoNew,"vdate":date.today(), "uid":uid})
     conn.commit()
     print("Success!")
+    print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
 def func_test():
     conn = sqlite3.connect('./test_data.db')
     giveVote("mldang", conn, "p048")

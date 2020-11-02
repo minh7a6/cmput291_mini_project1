@@ -2,7 +2,7 @@ import sqlite3
 from datetime import date
 def privUserEdit(conn,pid):
     c	=	conn.cursor()
-    print("\r\n------------------------------------------------Edit Page------------------------------------------------")
+    print("\r\n------------------------------------------------Edit Page------------------------------------------------\r\n")
     query = "Select * from posts p1 Where p1.pid = \""+ pid+"\";"
     c.execute(query)
     rowEdit = c.fetchall()
@@ -16,4 +16,5 @@ def privUserEdit(conn,pid):
     c.execute('''UPDATE 'posts' SET title = (:title) , body = (:body) WHERE pid = (:pid);''',
               {"title":title, "body":body, "pid":rowEdit[0]})
     conn.commit()
-    print("Success")
+    print("Success!")
+    print("\r\n--------------------------------------------------------------------------------------------------------\r\n")

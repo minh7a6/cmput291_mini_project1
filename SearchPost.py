@@ -59,7 +59,7 @@ def SearchMain(c):
                     on answerCount.pid =  keyword.pid"""
         c.execute(query)
         table = c.fetchall()
-        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans /r/n")
+        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans \r\n")
         count = 1
         for x in table:
             print(str(count) +" ||  " + checkNull(x[0]) +" ||  "

@@ -18,6 +18,7 @@ def normal_menu(uid, conn):
     c.execute('''SELECT name FROM users WHERE uid = (:uid);''', {"uid": uid})
     row = c.fetchone()
     while True:
+        print("\r\n------------------------------------------------Main Menu------------------------------------------------")
         print("Hello {0} ! What would you like to do today?".format(row[0]))
         print("1: Post a Question")
         print("2: Search for a Post")
@@ -55,6 +56,7 @@ def privileged_menu(uid, conn):
     c.execute('''SELECT name FROM users WHERE uid = (:uid);''', {"uid": uid})
     row = c.fetchone()
     while True:
+        print("\r\n------------------------------------------------Main Menu------------------------------------------------")
         print("Hello {0} ! What would you like to do today?".format(row[0]))
         print("1: Post a Question")
         print("2: Search for a Post")
@@ -101,7 +103,6 @@ def privileged_menu(uid, conn):
 
 def main_menu(uid, conn):
     c = conn.cursor()
-    print("\r\n------------------------------------------------Main Menu------------------------------------------------")
     c.execute('''SELECT * FROM privileged WHERE uid = (:uid);''', {"uid": uid})
     row = c.fetchone()
     if row is None:

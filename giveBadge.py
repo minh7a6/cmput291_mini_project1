@@ -2,6 +2,7 @@ import sqlite3
 from datetime import date
 
 def giveBadge(uid, conn, posters):
+    print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
     c = conn.cursor()
     # uid = input("Put the uid you would like to give badge today: ")
     # c.execute('''SELECT u.uid FROM users u WHERE u.uid = (:uid);''', {"uid": posters})
@@ -18,7 +19,7 @@ def giveBadge(uid, conn, posters):
     c.execute('''INSERT INTO 'ubadges' VALUES(:uid, :bdate, :bname);''',{"uid": posters, "bname": bname, "bdate": date.today()})
     conn.commit()
     print("Success")
-
+    print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
 def func_test():
     conn = sqlite3.connect('./test_data.db')	
     giveBadge("mldang", conn)

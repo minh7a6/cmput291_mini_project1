@@ -28,6 +28,7 @@ def loginPage(conn):
             else:
                 tryAgain = input("Wrong Username or password. Would you like to try again(1: Yes) (2: No)?  " )
                 if tryAgain == "2":
+                    conn.close()
                     sys.exit("leaving....")
         return userId
     elif LogSignOption=="2":
@@ -44,6 +45,7 @@ def loginPage(conn):
                 c.execute('Select uid FROM users WHERE uid=?;', (newUserId,))
                 rows = c.fetchall()
             else:
+                conn.close()
                 sys.exit("leaving....")
         newName = input ("Please enter your name: ")
         newPassword = input ("Please enter your password: ")
@@ -54,4 +56,5 @@ def loginPage(conn):
         print("Success!")
         return newUserId
     else:
+        conn.close()
         sys.exit("Wrong Option, exiting out of program")
