@@ -18,8 +18,13 @@ def acceptedAns(uid, conn, pid_input):
         if sel == "2":
             print("Going back to menu...")
             return
+        elif sel == "1":
+            print("Starting to change....")
+        else: 
+            return print("Wrong option")
     c.execute('''UPDATE 'questions' SET theaid = (:theaid) WHERE pid = (:pid)''', {"pid":q_pid, "theaid": pid_input})
     conn.commit()
+    print("Success")
 
 def func_test():
     conn = sqlite3.connect('./test_data.db')
