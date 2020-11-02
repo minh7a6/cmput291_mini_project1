@@ -27,7 +27,7 @@ def normal_menu(uid, conn):
             Post(uid, conn)
         elif sel == "2":
             table = SearchMain(conn.cursor())
-            if len(table) > 0:
+            if table is not None:
                 while True:
                     print("What would you like to do with the post? ")
                     print("1: Post action-Answer")
@@ -64,7 +64,7 @@ def privileged_menu(uid, conn):
             Post(uid, conn)
         elif sel == "2":
             table = SearchMain(conn.cursor())
-            if len(table) > 0:
+            if table is not None:
                 while True:
                     print("What would you like to do with the post? ")
                     print("1: Post action-Answer")

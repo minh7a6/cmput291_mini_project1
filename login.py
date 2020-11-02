@@ -53,3 +53,5 @@ def loginPage(conn):
         conn.commit()
         print("Success!")
         return newUserId
+    else:
+        sys.exit("Wrong Option, exiting out of program")
