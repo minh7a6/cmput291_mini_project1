@@ -53,9 +53,7 @@ def SearchMain(c):
                     on answerCount.pid =  keyword.pid"""
         c.execute(query)
         print(c.fetchall())
-        returnPage = input("Would you like to return to the main menue? 1.Yes 2.No")
-        if returnPage == "1":
-            end =True
+        return 1,2
 
 
 
