@@ -32,10 +32,13 @@ def loginPage(conn):
                     sys.exit("leaving....")
         return userId
     elif LogSignOption=="2":
-        print ("Signup page")
+        print ("Sign Up page")
         newUserId = input("Please enter a user id: ")
-        while len(newUserId) > 4:
-            newUserId = input("UID exceeds 4 characters. Please try again: ")
+        while len(newUserId) > 4 or newUserId.isalnum():
+            if len(newUserId) > 4:
+                newUserId = input("User ID exceeds 4 characters. Please try again: ")
+            else:
+                newUserId = input("User ID can only contain alphanumeric character. Please try again: ")
         c.execute('Select uid FROM users WHERE uid=?;', (newUserId,))
         rows = c.fetchall()
         while(rows !=[]):
@@ -49,6 +52,8 @@ def loginPage(conn):
                 sys.exit("leaving....")
         newName = input ("Please enter your name: ")
         newPassword = input ("Please enter your password: ")
+        while newPassword.isalnum():
+            newPassword = input("Password can only contain alphanumeric character. Please try again: ")
         newCity = input ("Please enter your city: ")
         c.execute('''INSERT INTO users VALUES(:userId ,:name , :pwd , :city , :crdate );''',
                 {"userId":newUserId, "name":newName,"pwd":newPassword, "city":newCity, "crdate":date.today()})
