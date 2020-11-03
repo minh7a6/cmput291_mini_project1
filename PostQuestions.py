@@ -1,5 +1,8 @@
 import sqlite3
 from datetime import date
+#Function Post
+#Args : uid - user id of the user posting question,conn -connection to database
+#Desciption: post a question 
 def Post(uid,conn):
     c = conn.cursor()
     print("\r\n------------------------------------------------Post Page------------------------------------------------")
