@@ -30,6 +30,7 @@ def normal_menu(uid, conn):
             table = SearchMain(conn.cursor())
             if table is not None:
                 while True:
+                    print("\r\n--------------------------------------Post ID: {0} || Poster: {1}-------------------------------------".format(table[0],table[1]))
                     print("What would you like to do with the post? ")
                     print("1: Post action-Answer")
                     print("2: Post action-Vote")
@@ -40,7 +41,8 @@ def normal_menu(uid, conn):
                     elif sel == "2":
                         giveVote(uid, conn, table[0])
                     elif sel == "3":
-                        print("Going back to menu")
+                        print("Going back to menu...\r\n")
+                        print("------------------------------------------------------------------------------------------------------------")
                         break
                     else: 
                         print("Invalid option")
@@ -68,7 +70,8 @@ def privileged_menu(uid, conn):
             table = SearchMain(conn.cursor())
             if table is not None:
                 while True:
-                    print("What would you like to do with the post? ")
+                    print("\r\n--------------------------------------Post ID: {0} || Poster: {1}-------------------------------------".format(table[0],table[1]))
+                    print("\r\nWhat would you like to do with the post?")
                     print("1: Post action-Answer")
                     print("2: Post action-Vote")
                     print("3: Post action-Mark as the accepted")
@@ -90,7 +93,8 @@ def privileged_menu(uid, conn):
                     elif sel =="6":
                         privUserEdit(conn, table[0])
                     elif sel == "7":
-                        print("Going back to menu")
+                        print("Going back to menu...\r\n")
+                        print("------------------------------------------------------------------------------------------------------------")
                         break
                     else: 
                         print("Invalid option")

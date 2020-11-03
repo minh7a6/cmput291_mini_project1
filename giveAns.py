@@ -26,7 +26,7 @@ def giveAns(uid, conn, pid):
                 {"pid": pidNew, "pdate": date.today(), "title": title, "body":body, "poster": uid})
     c.execute('''INSERT INTO 'answers' VALUES(:pid, :qid);''', {"pid": pidNew, "qid": pid})
     conn.commit()
-    print("Success")
+    print("Success!")
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
 def func_test():
     conn = sqlite3.connect('./test_data.db')	

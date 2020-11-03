@@ -5,7 +5,7 @@ import sys
 from os.path import isfile
 def main(args):
     if not isfile(args) or not args.endswith('.db'):
-        sys.exit("Unable to open database, please check your path. Exiting...")
+        sys.exit("Unable to open database, please check your path and make sure database ends with '.db'. Exiting...")
     conn	=	sqlite3.connect(args)	
     uid = loginPage(conn)
     main_menu(uid,conn)
