@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import date
-from numGen import numGen
+from util import numGen
 def Post(uid,conn):
     c = conn.cursor()
     print("\r\n------------------------------------------------Post Page------------------------------------------------")

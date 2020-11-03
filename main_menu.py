@@ -18,7 +18,7 @@ def normal_menu(uid, conn):
     c.execute('''SELECT name FROM users WHERE uid = (:uid);''', {"uid": uid})
     row = c.fetchone()
     while True:
-        print("\r\n------------------------------------------------Main Menu------------------------------------------------")
+        print("\r\n------------------------------------------------Main Menu---------------------------------------------------")
         print("Hello {0} ! What would you like to do today?".format(row[0]))
         print("1: Post a Question")
         print("2: Search for a Post")
@@ -113,8 +113,3 @@ def main_menu(uid, conn):
         normal_menu(uid, conn)
     else: 
         privileged_menu(uid, conn)
-
-# def func_test():
-#     conn = sqlite3.connect('./test_data.db')	
-#     main_menu("mldang", conn)
-# func_test()

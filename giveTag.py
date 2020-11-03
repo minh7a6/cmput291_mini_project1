@@ -13,7 +13,7 @@ def giveTag(uid, conn, pid):
     c.execute(script)
     row = c.fetchone()
     if row is not None:
-        print("tag already exists for that posts, going back to menu...")
+        print("To avoid duplicate, the tag name was there, please use other words")
         print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
         return
     c.execute('''INSERT INTO 'tags' VALUES(:pid, :tag);''',{"pid": pid, "tag": tag})

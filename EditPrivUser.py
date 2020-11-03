@@ -8,7 +8,7 @@ def privUserEdit(conn,pid):
     rowEdit = c.fetchall()
     rowEdit = rowEdit[0]
     print("Current row your editing:")
-    print("PID:    " + str(rowEdit[0]))
+    # print("PID:    " + str(rowEdit[0]))
     print("Title:  " + rowEdit[2])
     print("Body:   " + rowEdit[3])
     title = input("Please input a new title:  ")

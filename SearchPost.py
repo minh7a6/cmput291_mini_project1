@@ -1,11 +1,7 @@
 import sqlite3
 from datetime import date
+from util import checkString
 
-def checkNull(x):
-    if x is None:
-        return "None"
-    else:
-        return str(x)
 def SearchMain(c):
     print("\r\n------------------------------------------------Search Page------------------------------------------------")
     end = False
@@ -59,14 +55,14 @@ def SearchMain(c):
                     on answerCount.pid =  keyword.pid"""
         c.execute(query)
         table = c.fetchall()
-        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans \r\n")
+        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans")
         count = 1
         for x in table:
-            print(str(count) +" ||  " + checkNull(x[0]) +" ||  "
-                    + checkNull(x[1])+" ||  "+checkNull(x[2]) 
-                    + " ||  "+ checkNull(x[3]) + " ||  "+ checkNull(x[4]) + " ||  "
-                    + checkNull(x[5]) + " ||  "
-                    + checkNull(x[6]))
+            print(str(count) +" ||  " + checkString(x[0]) +" ||  "
+                    + checkString(x[1])+" ||  "+ checkString(x[2]) 
+                    + " ||  "+ checkString(x[3]) + " ||  "+ checkString(x[4]) + " ||  "
+                    + checkString(x[5]) + " ||  "
+                    + checkString(x[6]))
             count += 1
         if len(table) == 0:
             return print("There are no posts matching your keyword, going back to menu...")

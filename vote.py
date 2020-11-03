@@ -1,7 +1,7 @@
 import sqlite3
 import sys
 from datetime import date
-from numGen import numGen
+from util import numGen
 
 def giveVote(uid, conn, pid_tar):
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
@@ -9,7 +9,7 @@ def giveVote(uid, conn, pid_tar):
     c.execute('''SELECT * FROM votes v WHERE v.pid = :pid AND v.uid = :uid;''', {"pid": pid_tar, "uid":uid})
     row = c.fetchone()
     if row is not None:
-        print("you already voted for this posts, going back to menu...")
+        print("You already voted for this posts")
         print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
         return
     print("Starting to Vote...")

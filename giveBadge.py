@@ -18,12 +18,12 @@ def giveBadge(uid, conn, posters):
     c.execute('''SELECT bname FROM badges WHERE LOWER(bname) = LOWER((:bname));''', {"bname": bname})
     row = c.fetchone()
     if row is None:
-        print("The badge name does not exist in database, going back to menu...")
+        print("The badge name does not exist in database")
         return
 
     c.execute('''INSERT INTO 'ubadges' VALUES(:uid, :bdate, :bname);''',{"uid": posters, "bname": row[0], "bdate": date.today()})
     conn.commit()
-    print("Success")
+    print("Success!")
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
 def func_test():
     conn = sqlite3.connect('./test_data.db')	

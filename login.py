@@ -22,7 +22,7 @@ def loginPage(conn):
                     {"userId": userId, "password":password})
             rows = c.fetchall()
             if(rows!=[]):
-                print("Sucess")
+                print("Success!")
                 tryAgain = False
                 return userId
             else:
@@ -41,7 +41,7 @@ def loginPage(conn):
         while(rows !=[]):
             key = input("You have entered in a duplicate user Id do you want to try another(1: yes) (2:no)? ")
             if key == "1":
-                newUserId = input("Please enter a user id ")
+                newUserId = input("Please enter a user id: ")
                 c.execute('Select uid FROM users WHERE uid=?;', (newUserId,))
                 rows = c.fetchall()
             else:

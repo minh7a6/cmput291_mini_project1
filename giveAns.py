@@ -1,16 +1,15 @@
 import sqlite3
 from datetime import date
 from sqlite3.dbapi2 import Date
-from numGen import numGen
+from util import numGen
 
 def giveAns(uid, conn, pid):
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
     c = conn.cursor()
-    # pid = input("Put the post ID that you want to answer: ")
     c.execute('''SELECT q.pid FROM questions q WHERE q.pid = :pid;''', {"pid": pid})
     row = c.fetchone()
     if row is None:
-        print("the post id is not a question, going back to menu...")
+        print("The post id is not a question")
         print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
         return
     pidNew = numGen(4)
