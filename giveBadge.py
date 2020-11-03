@@ -10,13 +10,18 @@ def giveBadge(uid, conn, posters):
     # if row is None:
     #     print("The uid does not exist in database, going back to menu...")
     #     return
-    bname = input("What badge would you like to give today?: ")
-    c.execute('''SELECT * FROM badges WHERE bname = (:bname);''', {"bname": bname})
+    c.execute('''SELECT * FROM ubadges WHERE bdate = (:bdate) AND uid = (:uid);''', {"bdate": date.today(), "uid":posters})
+    row = c.fetchone()
+    if row is not None:
+        return print("This poster has received a badge today")
+    bname = input("What badge would you like to give to {0} today?: ".format(posters))
+    c.execute('''SELECT bname FROM badges WHERE LOWER(bname) = LOWER((:bname));''', {"bname": bname})
     row = c.fetchone()
     if row is None:
         print("The badge name does not exist in database, going back to menu...")
         return
-    c.execute('''INSERT INTO 'ubadges' VALUES(:uid, :bdate, :bname);''',{"uid": posters, "bname": bname, "bdate": date.today()})
+
+    c.execute('''INSERT INTO 'ubadges' VALUES(:uid, :bdate, :bname);''',{"uid": posters, "bname": row[0], "bdate": date.today()})
     conn.commit()
     print("Success")
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
