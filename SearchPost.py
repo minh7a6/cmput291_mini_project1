@@ -1,13 +1,16 @@
 import sqlite3
 from datetime import date
+from util import checkString
+
 #Function SearchMain
 #Args : c - cursor
 #Desciption: search for a post by using keywords that will match with the title, body, tags
+
 def SearchMain(c):
     print("\r\n------------------------------------------------Search Page------------------------------------------------")
     end = False
     while end ==False:
-        keyword = input("Please input keyword(s) to search (please leave a space between each keyword)")
+        keyword = input("Please input keyword(s) to search (please leave a space between each keyword): ")
         keywordList = keyword.split()
         query = ""
         start =True
@@ -19,7 +22,7 @@ def SearchMain(c):
             else:
                 query = query +", table"+ str(counter)+" as (SELECT * FROM posts p1 WHERE p1.title like '%"+word+"%' or p1.body like '%"+word+"%' UNION Select p1.pid, p1.pdate, p1.title, p1.body, p1.poster from posts p1, tags t1 WHERE p1.pid= t1.pid AND t1.tag like '%"+word+"%') "
             counter =counter +1
-        counter =1;
+        counter = 1
         for word in keywordList:
             if counter ==1 :
                 query = query + "Select * FROM table"+str(counter)
@@ -55,9 +58,36 @@ def SearchMain(c):
                     LEFT join answerCount
                     on answerCount.pid =  keyword.pid"""
         c.execute(query)
-        print(c.fetchall())
-        return 1,2
-
-
-
+        table = c.fetchall()
+        print("No || PID || pdate || Title || Body || Poster || # Votes || # Ans")
+        count = 1
+        for x in table:
+            print(str(count) +" ||  " + checkString(x[0]) +" ||  "
+                    + checkString(x[1])+" ||  "+ checkString(x[2]) 
+                    + " ||  "+ checkString(x[3]) + " ||  "+ checkString(x[4]) + " ||  "
+                    + checkString(x[5]) + " ||  "
+                    + checkString(x[6]))
+            count += 1
+        if len(table) == 0:
+            return print("There are no posts matching your keyword, going back to menu...")
+        sel = input("Which post do you want to choose(1-{0})? ".format(len(table)))
+        if sel.isnumeric():
+            if int(sel) > len(table) or int(sel) < 1:
+                sel = input("Wrong option would you like to go back to menu (1: yes)?")
+                if sel == "1":
+                    return print("Going back to menu")
+                else:
+                    print("Going back to Search post")
+            else:
+                return (table[int(sel) - 1][0], table[int(sel)-1][4])
+        else:
+            sel = input("Wrong option would you like to go back to menu (1: yes)?")
+            if sel == "1":
+                return print("Going back to menu")
+            else:
+                print("Going back to Search post")
+def func_test():
+    conn = sqlite3.connect('./test_data.db')	
+    print(str(SearchMain(conn.cursor())))
+# func_test()
 

@@ -1,9 +1,17 @@
 from login import loginPage
 import sqlite3
 from main_menu import main_menu 
-def main():
-    conn	=	sqlite3.connect('./assignment.db')	
-    uid = loginPage(conn)
-    main_menu(uid,conn)
+import sys
+from os.path import isfile
+def main(args):
+    if not isfile(args) or not args.endswith('.db'):
+        sys.exit("Unable to open database, please check your path and make sure database file has file type with '.db'.")
+    conn	=	sqlite3.connect(args)	
+    while True:
+        uid = loginPage(conn)
+        if uid is not None:
+            main_menu(uid,conn)
 if __name__ == "__main__":
-    main()
+    if(len(sys.argv) < 2):
+        sys.exit("Please input your file")
+    main(sys.argv[1])
