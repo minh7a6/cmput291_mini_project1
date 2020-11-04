@@ -9,10 +9,6 @@ from PostQuestions import Post
 from SearchPost import SearchMain
 from EditPrivUser import privUserEdit
 
-
-def exit(conn):
-    conn.close()
-
 def normal_menu(uid, conn):
     c = conn.cursor()
     c.execute('''SELECT name FROM users WHERE uid = (:uid);''', {"uid": uid})
@@ -48,7 +44,6 @@ def normal_menu(uid, conn):
                         print("Invalid option")
         elif sel == "3":
             print("Logging out...")
-            exit(conn)
             break
         else: 
             print("Invalid option")
@@ -100,7 +95,6 @@ def privileged_menu(uid, conn):
                         print("Invalid option")
         elif sel == "3":
             print("Logging out...")
-            exit(conn)
             break
         else: 
             print("Invalid option")

@@ -1,15 +1,14 @@
 import sqlite3
 from datetime import date
 
+"""
+Function: giveBadge(uid, conn, posters)
+Description: this is to give a badge to the posters, this function is only available for privileged user.
+"""
+
 def giveBadge(uid, conn, posters):
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
     c = conn.cursor()
-    # uid = input("Put the uid you would like to give badge today: ")
-    # c.execute('''SELECT u.uid FROM users u WHERE u.uid = (:uid);''', {"uid": posters})
-    # row = c.fetchone()
-    # if row is None:
-    #     print("The uid does not exist in database, going back to menu...")
-    #     return
     c.execute('''SELECT * FROM ubadges WHERE bdate = (:bdate) AND uid = (:uid);''', {"bdate": date.today(), "uid":posters})
     row = c.fetchone()
     if row is not None:

@@ -2,6 +2,11 @@ import sqlite3
 import sys
 from datetime import date
 
+"""
+Function: acceptedAns(uid, conn, pid_input)
+Description: this is to mark an answer is an accepted one for a question. This is only avalaible for the privileged user
+"""
+
 def acceptedAns(uid, conn, pid_input):
     print("\r\n--------------------------------------------------------------------------------------------------------")
     c = conn.cursor()
@@ -16,12 +21,8 @@ def acceptedAns(uid, conn, pid_input):
     c.execute('''SELECT q.theaid FROM questions q WHERE q.pid = (:pid);''', {"pid": q_pid})
     row = c.fetchall()
     if len(row) > 1:
-        sel = input("The question already has an accepted answer, do you still want to continue (1: yes) (2: no)? ")
-        if sel == "2":
-            print("Going back to menu...")
-            print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
-            return
-        elif sel == "1":
+        sel = input("The question already has an accepted answer, do you still want to continue (1: yes)? ")
+        if sel == "1":
             print("Starting to change....")
         else: 
             return print("Wrong option")

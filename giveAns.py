@@ -3,6 +3,11 @@ from datetime import date
 from sqlite3.dbapi2 import Date
 from util import numGen
 
+"""
+Function: giveAns(uid, conn, pid)
+Description: this is the Post Action-Answer components for normal/privileged user
+"""
+
 def giveAns(uid, conn, pid):
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
     c = conn.cursor()

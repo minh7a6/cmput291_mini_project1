@@ -3,6 +3,12 @@ import sys
 from datetime import date
 from util import numGen
 
+"""
+Function: giveVote(uid, conn, pid_tar)
+Description: this is to give a vote for a post no matter if it is a question or an answer. This function is avaialable for
+            normal/privileged user
+"""
+
 def giveVote(uid, conn, pid_tar):
     print("\r\n--------------------------------------------------------------------------------------------------------\r\n")
     c = conn.cursor()
