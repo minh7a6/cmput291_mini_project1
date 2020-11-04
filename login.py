@@ -31,7 +31,7 @@ def loginPage(conn):
             print ("Sign Up Page")
             newUserId = input("Please enter a user id: ")
             c.execute('Select uid FROM users WHERE uid=?;', (newUserId,))
-            rows = c.fetchone()
+            rows = c.fetchall()
             while rows !=[] or len(newUserId) > 4 or (not newUserId.isalnum()):
                 if len(newUserId) > 4:
                     key = input("User ID can only have maximum of 4 letters. Do you want to try another(1: yes)? ")
@@ -42,7 +42,7 @@ def loginPage(conn):
                 if key == "1":
                     newUserId = input("Please enter a user id: ")
                     c.execute('Select uid FROM users WHERE uid=?;', (newUserId,))
-                    rows = c.fetchone()
+                    rows = c.fetchall()
                 else:
                     return
             newName = input("Please enter your name: ")
