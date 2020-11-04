@@ -1,5 +1,9 @@
 import sqlite3
 from datetime import date
+#Function privUserEdit
+#Args : conn -connection to database, pid  - pid of post to be edited
+#Desciption: allows privllage user to edit a post's title and body
+
 def privUserEdit(conn,pid):
     c	=	conn.cursor()
     print("\r\n------------------------------------------------Edit Page------------------------------------------------\r\n")
