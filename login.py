@@ -3,7 +3,9 @@ from datetime import date
 import sqlite3
 import sys
 import re
-
+#Function loginPage
+#Args :conn -connection to database
+#Desciption: Provides the login page where users can signup or sign in
 def loginPage(conn):
     while True:
         print("\r\n------------------------------------------------Login Page------------------------------------------------")

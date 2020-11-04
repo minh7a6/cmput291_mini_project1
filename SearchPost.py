@@ -2,6 +2,10 @@ import sqlite3
 from datetime import date
 from util import checkString
 
+#Function SearchMain
+#Args : c - cursor
+#Desciption: search for a post by using keywords that will match with the title, body, tags
+
 def SearchMain(c):
     print("\r\n------------------------------------------------Search Page------------------------------------------------")
     end = False

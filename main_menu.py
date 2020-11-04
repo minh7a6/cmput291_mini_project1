@@ -9,6 +9,11 @@ from PostQuestions import Post
 from SearchPost import SearchMain
 from EditPrivUser import privUserEdit
 
+
+#Function normal_menu
+#Args : uid - uid of user using the program, conn - connection to database
+#Desciption: provides menue for non Privileged  users
+
 def normal_menu(uid, conn):
     c = conn.cursor()
     c.execute('''SELECT name FROM users WHERE uid = (:uid);''', {"uid": uid})
@@ -47,7 +52,9 @@ def normal_menu(uid, conn):
             break
         else: 
             print("Invalid option")
-
+#Function privileged_menu
+#Args : uid - uid of user using the program, conn - connection to database
+#Desciption: provides menue for  Privileged  users
 def privileged_menu(uid, conn):
     c = conn.cursor()
     c.execute('''SELECT name FROM users WHERE uid = (:uid);''', {"uid": uid})
