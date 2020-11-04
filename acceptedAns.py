@@ -19,8 +19,8 @@ def acceptedAns(uid, conn, pid_input):
         return
     q_pid = row[0]
     c.execute('''SELECT q.theaid FROM questions q WHERE q.pid = (:pid);''', {"pid": q_pid})
-    row = c.fetchall()
-    if len(row) > 1:
+    row = c.fetchone()
+    if row is not None:
         sel = input("The question already has an accepted answer, do you still want to continue (1: yes)? ")
         if sel == "1":
             print("Starting to change....")
